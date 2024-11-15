@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Creation Request</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        header img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .verification {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .verification textarea {
+            width: 50%;
+            height: 60px;
+            margin-left: 10px;
+            padding: 5px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+        .instructions {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="YOUR_LOGO_URL" alt="Logo">
+        <h1>Request Your Free Custom Website</h1>
+    </header>
+    
+    <p>Enter your name and generate a code to begin the process.</p>
+    
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    
+    <div class="verification">
+        <p style="text-align: left;">
+            I (<span id="namePlaceholder">your name</span>),<br>
+            Is going to ask for making a website and I agree that the ownership of my site will not be under me and advertisement can be done using my site.
+        </p>
+        <textarea id="verificationInput" placeholder="Rewrite the text here"></textarea>
+    </div>
+
+    <button onclick="checkVerification()">Submit</button>
+
+    <div class="instructions">
+        <p id="codeDisplay">Your code will appear here.</p>
+        <p>Instructions: Copy and take screenshot of the generated code and contact me on Discord to discuss your project.</p>
+    </div>
+
+    <button onclick="redirectToDiscord()">Contact on Discord</button>
+
+    <script>
+        function checkVerification() {
+            const name = document.getElementById('nameInput').value;
+            const verificationText = document.getElementById('verificationInput').value.trim();
+            const expectedText = `I (${name}),\nIs going to ask for making a website and I agree that the ownership of my site will not be under me and advertisement can be done using my site.`;
+
+            if (verificationText === expectedText) {
+                alert('Verification matched. You may proceed.');
+                generateCode();
+            } else {
+                alert('Verification did not match. Please rewrite the text correctly.');
+            }
+        }
+
+        function generateCode() {
+            const name = document.getElementById('nameInput').value;
+            if (name) {
+                document.getElementById('namePlaceholder').innerText = name;
+                document.getElementById('codeDisplay').innerText = `Code for ${name}: ` + Math.random().toString(36).substring(2, 10).toUpperCase();
+            } else {
+                alert('Please enter your name');
+            }
+        }
+
+        function redirectToDiscord() {
+            window.location.href = 'https://discord.gg/YOUR_SERVER_LINK';
+        }
+    </script>
+</body>
+</html>
